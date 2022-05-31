@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 
 import './App.css';
@@ -13,6 +14,10 @@ function App() {
   const [filteredPokemons, setFilteredPokemons] = useState<IPokemon[]>([]);
 
   const [searchValue, setSearchValue ] = useState<string>("");
+
+  const [showForm, setShowForm] = useState<boolean>(false);
+
+  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
 
  
   useEffect(()=> {
@@ -32,9 +37,9 @@ function App() {
     }
 
     fetchPokemons();
-  },[]);
+  },[shouldFetch]);
 
-  const onSearch = () => {
+  /*const onSearch = () => {
     if(searchValue!==''){
      
       setFilteredPokemons(pokemons.filter((poke:IPokemon)=> {
@@ -45,7 +50,7 @@ function App() {
       setFilteredPokemons(pokemons);
     }
     
-  }
+  }*/
 
   const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>)=> {
     setSearchValue(e.target.value);
@@ -63,13 +68,15 @@ function App() {
   return (
     <div className="App">
       <div className='searchBar'>
-        <input name='searchValue' placeholder='Buscar por nombre' value={searchValue}  onChange={onChangeSearch}/>
-      
+        <input  data-testid="search-pokemon" name='searchValue' placeholder='Buscar por nombre' value={searchValue}  onChange={onChangeSearch}/>
+        <button onClick={()=> setShowForm(true)}>Nuevo Pokemon</button>
       </div>
 
       <PokemonTable data={filteredPokemons} service={dataService} />
 
-      <PokemoForm service={dataService} />
+      {showForm &&   <PokemoForm setShouldFetch={setShouldFetch} service={dataService}  setShowForm={setShowForm  }/>
+
+     }
      
     </div>
   );

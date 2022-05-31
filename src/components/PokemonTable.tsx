@@ -8,7 +8,7 @@ interface TableProps {
 
 export default function PokemonTable({ service, data }: TableProps) {
   return (
-    <table>
+    <table data-testid="pokemon-table">
         <tr>
             <th>Nombre</th>
             <th>Imagen</th>

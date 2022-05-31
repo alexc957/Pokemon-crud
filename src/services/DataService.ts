@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { IDataService } from "../interfaces/interfaces";
+import axios from "axios";
+import { IDataService, IPokemon } from "../interfaces/interfaces";
 
 
 
@@ -20,8 +20,8 @@ export class DataService implements IDataService {
 
         return axios.get(`${process.env.REACT_APP_POKE_API}/pokemons?idAuthor=1`);
     }
-    post(): Promise<any> {
-        throw new Error("Method not implemented.");
+    post(pkemon: IPokemon): Promise<any> {
+       return axios.post(`${process.env.REACT_APP_POKE_API}/pokemons?idAuthor=1`,pkemon);
     }
     getOne(id: string): Promise<any> {
         throw new Error("Method not implemented.");
