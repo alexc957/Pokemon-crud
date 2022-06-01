@@ -18,6 +18,7 @@ Este proyecto permite realizar operaciones CRUD usando una rest API de pokemones
 3. ejecutar: `mpm start` para ejecutar le servidor de desarrollo local. 
 4. para ejecutar las pruebas: `npm test`
 
+nota: tambien se puede visitar en esta [url](https://pokemon-crud-bco.netlify.app/) la app deployada en netlify.
 
 ## Capturas
 ![Alt text](./capturas/home.png "Home")

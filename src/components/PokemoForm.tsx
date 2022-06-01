@@ -112,21 +112,22 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
         <div className="form-child">
 
         <div>
-        <label htmlFor='attack'>Ataque</label>
-        <input 
-            id='attack' 
-            name='attack' 
-            data-testid="attack" 
-            value={pokemonState.attack}  
-            onChange={(e)=> setPokemonState({...pokemonState, attack: +e.target.value})}
-            type="range" 
-            min={0} 
-            required
-            max={100} />
+          <label htmlFor='attack'>Ataque: {pokemonState.attack}</label>
+          <input 
+              id='attack' 
+              name='attack' 
+              data-testid="attack" 
+              value={pokemonState.attack}  
+              onChange={(e)=> setPokemonState({...pokemonState, attack: +e.target.value})}
+              type="range" 
+              min={0} 
+              required
+              max={100} />
+            
         </div>
 
         <div>
-        <label htmlFor='defense'>Defensa</label>
+        <label htmlFor='defense'>Defensa: {pokemonState.defense}</label>
         <input 
           id='defense' 
           name='defense' 
@@ -137,10 +138,11 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
           required
           min={0} 
           max={100} />
+        
         </div>
 
         <div>
-        <label htmlFor='hp'>Hp</label>
+        <label htmlFor='hp'>Hp: {pokemonState.hp}</label>
         <input 
           id='hp' 
           name='hp' 
@@ -150,6 +152,7 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
           type="range" 
           min={0} 
           max={100} />
+           
         </div>
 
         </div>

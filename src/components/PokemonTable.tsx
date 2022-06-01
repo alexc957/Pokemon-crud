@@ -33,8 +33,10 @@ export default function PokemonTable({ data, searchValue, setSelectedPokemon, se
             <tr>
                 <th>Nombre</th>
                 <th>Imagen</th>
+                <th>Tipo</th>
                 <th>Ataque</th>
                 <th>Defensa</th>
+                <th>Hp</th>
                 <th>Acciones</th>
 
             </tr>
@@ -53,8 +55,10 @@ export default function PokemonTable({ data, searchValue, setSelectedPokemon, se
                 <td>
                  <a href={poke.image} target="_blank" rel="noopener noreferrer">ver Imagen</a>
                 </td>
+                <td>{poke.type}</td>
                 <td>{poke.attack}</td>
                 <td>{poke.defense}</td>
+                <td>{poke.hp}</td>
                 <td>
                     <button className='btn-add ' onClick={() => {setSelectedPokemon(poke); setShowForm(true)}}>Editar</button>
                     <button className='btn-delete' onClick={() => deletePokemon(poke.id)}>Eliminar</button>
