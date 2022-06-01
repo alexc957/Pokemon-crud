@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 
 import './App.css';
 import { DataService } from './services/DataService';
 import { IPokemon ,IDataService} from './interfaces/interfaces';
 import PokemonTable from './components/PokemonTable';
 import PokemoForm from './components/PokemoForm';
+import { ShowFormContextProvider } from './contexts/ShowFormContext';
 
+
+//const ShowFormContext = createContext<any>
 
 function App() {
   const dataService: IDataService = DataService.getInstance();
@@ -17,6 +20,11 @@ function App() {
   const [searchValue, setSearchValue ] = useState<string>("");
 
   const [showForm, setShowForm] = useState<boolean>(false);
+
+
+  const [selectedPokemon, setSelectedPokemon] = useState<IPokemon | undefined>(undefined);
+
+
 
 
 
@@ -49,20 +57,31 @@ function App() {
 
   
   return (
-    
+    <ShowFormContextProvider value={{setShowForm}}>      
       <div className="App">
         <div className='searchBar'>
           <input  data-testid="search-pokemon" name='searchValue' placeholder='Buscar por nombre' value={searchValue}  onChange={onChangeSearch}/>
           <button onClick={()=> setShowForm(true)} data-testid="new-pokemon">Nuevo Pokemon</button>
         </div>
 
-        <PokemonTable data={pokemons} searchValue={searchValue} />
+        <PokemonTable 
+            //setShowForm={setShowForm}
+            data={pokemons} 
+            searchValue={searchValue}  
+            setSelectedPokemon={setSelectedPokemon}/>
 
-        {showForm &&   <PokemoForm setPokemons={setPokemons} service={dataService}  setShowForm={setShowForm  }/>
+        {showForm &&   <PokemoForm 
+                            pokemon={selectedPokemon} 
+                            setPokemons={setPokemons} 
+                            service={dataService}  
+                            //setShowForm={setShowForm}
+                            />
 
       }
       
       </div>
+
+      </ShowFormContextProvider>
    
   );
 }

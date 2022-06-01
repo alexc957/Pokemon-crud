@@ -15,7 +15,7 @@ export interface IDataService {
     get(): Promise<any>;
     post(pokemon: IPokemon): Promise<any>;
     getOne(id: string): Promise<any>;
-    put(id:string): Promise<any>;
+    put(id:string, pokemon: IPokemon): Promise<any>;
     delete(id: string): Promise<any>;
 
 
@@ -25,7 +25,7 @@ export interface IDataService {
 export interface IFormProps {
     pokemon?: IPokemon;
     service: IDataService
-    setShowForm: Function,
+   // setShowForm: Function,
     setPokemons: Function,
 }
 

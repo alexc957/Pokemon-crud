@@ -1,32 +1,69 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { POKEMON_TYPES } from '../constants';
+import { ShowFormContext } from '../contexts/ShowFormContext';
 import { IFormProps, IPokemon } from '../interfaces/interfaces'
 
 
 
-export default function PokemoForm({pokemon, service, setShowForm, setPokemons}: IFormProps) {
+export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) {
+
+  const {setShowForm} = useContext(ShowFormContext);
 
   const [pokemonState, setPokemonState] = useState<IPokemon>(
     pokemon || {name: "", image: "", attack: 0, defense: 0}
   )
 
+  useEffect(()=>{
+    if(pokemon){
+      setPokemonState(pokemon);
+    }
+
+  }, [pokemon])
+
+  const editPokemon = async () => {
+    const response = await service.put(pokemonState?.id, pokemonState);
+    if(response.status===200){
+      alert("Pokemon editado");
+      setPokemons((pokemons: IPokemon[]) => pokemons.map((poke:IPokemon) => {
+        if(poke.id === pokemonState.id){
+          return {...poke, ...pokemonState}
+        }
+        return poke;
+      }));
+
+    }else {
+      alert(`Ocurrio un problema ${JSON.stringify(response.data)}`);
+    }
+    
+  }
+
+  const addPokemon = async () => {
+    const response = await service.post(pokemonState);
+    if(response.status===200){
+      alert("Nuevo pokemon agregado");
+      setPokemons((pokemons: IPokemon[]) => [...pokemons,pokemonState]);
+     // setShouldFetch(true);
+    
+
+    }else {
+      alert("Ocurrio un problema");
+    }
+
+  }
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      if(pokemonState.id){
+        await editPokemon();
+      }else {
+        await addPokemon();
+      }
       
-        const response = await service.post(pokemonState);
-        if(response.status===200){
-          alert("Nuevo pokemon agregado");
-          setPokemons((pokemons: IPokemon[]) => [...pokemons,pokemonState]);
-         // setShouldFetch(true);
-        
-
-        }else {
-          alert("Ocurrio un problema");
-        }
-    }catch(e){
+       
+    }catch(e: any){
       console.log("error ",e)
-      alert("ocurrio un problema ")
+      alert("ocurrio un problema "+e.toString())
     }
   }
   

@@ -29,10 +29,10 @@ export class DataService implements IDataService {
        return axios.post(`${process.env.REACT_APP_POKE_API}/pokemons?idAuthor=1`,{...pokemon, idAuthor: 1});
     }
     getOne(id: string): Promise<any> {
-        throw new Error("Method not implemented.");
+        return axios.get(`${process.env.REACT_APP_POKE_API}/pokemons/${id}`);
     }
-    put(id: string): Promise<any> {
-        throw new Error("Method not implemented.");
+    put(id: string, pokemon:IPokemon): Promise<any> {
+        return axios.put(`${process.env.REACT_APP_POKE_API}/pokemons/${id}`,{...pokemon,idAuthor: 1});
     }
     delete(id: string): Promise<any> {
         throw new Error("Method not implemented.");
