@@ -12,8 +12,108 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 35%;
+  width: 65%;
   margin-bottom: 10px;
 }
 
 
+.poke-table {
+  border-collapse: collapse;
+  width: 68%;
+
+}
+
+.poke-table td, .poke-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+.poke-table tr:nth-child(even){background-color: #f2f2f2;}
+
+
+.poke-table  tr:hover {background-color: #ddd;}
+
+.poke-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #219ebc;
+  color: white;
+}
+
+
+button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn-add {
+  background-color:  #457b9d;
+
+}
+
+.btn-delete {
+  background-color: #e63946;
+}
+
+
+form {
+  width: 50%;
+
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.form-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 5px;
+  width: 75%;
+}
+
+input {
+  padding:8px;
+  display:block;
+  border:none;
+  border-bottom:1px solid #ccc;
+  width:65%
+}
+
+
+select {
+  width: 75%;
+  padding:16px;
+  border: none;
+  border-radius: 4px;
+   /*background-color: #f1f1f1; */
+}
+
+.form-child div {
+  width: 80%;
+}
+
+.tipo {
+  padding-right: 5px;
+}
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
