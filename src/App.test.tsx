@@ -4,11 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
 
 
 test("it should have an search input", () => {
@@ -25,6 +20,9 @@ test("it should have a table", () => {
 
 test("it should have a form to create new pokemons",()=> {
   render(<App />)
+  const newBtn = screen.getByTestId("new-pokemon")
+
+  userEvent.click(newBtn);
 
   const formElement = screen.getByTestId("pokemon-form");
   expect(formElement).toHaveFormValues({

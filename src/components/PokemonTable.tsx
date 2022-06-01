@@ -1,14 +1,15 @@
 import React from 'react'
-import { IDataService, IPokemon } from '../interfaces/interfaces';
+import { IPokemon } from '../interfaces/interfaces';
 
 interface TableProps {
-    service: IDataService;
-    data: IPokemon[]
+    //service: IDataService;
+    data: IPokemon[],
+    searchValue: string;
 }
 
-export default function PokemonTable({ service, data }: TableProps) {
+export default function PokemonTable({ data, searchValue }: TableProps) {
   return (
-    <table>
+    <table data-testid="pokemon-table">
         <tr>
             <th>Nombre</th>
             <th>Imagen</th>
@@ -17,7 +18,12 @@ export default function PokemonTable({ service, data }: TableProps) {
             <th>Acciones</th>
 
         </tr>
-        {data.map((poke: IPokemon) => {
+        {data.filter((pokemon:IPokemon)=> {
+            if(!searchValue){
+                return true;
+            }
+            return pokemon.name.toLowerCase().includes(searchValue.toLowerCase())
+        }).map((poke: IPokemon) => {
             return <tr key={poke.id}>
                 <td>{poke.name}</td>
                 <td>{poke.image}</td>
