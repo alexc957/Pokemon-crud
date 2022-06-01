@@ -1,5 +1,5 @@
 import React from 'react'
-import { IDataService, IPokemon } from '../interfaces/interfaces';
+import { IPokemon } from '../interfaces/interfaces';
 
 interface TableProps {
     //service: IDataService;
