@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ShowFormContext } from '../contexts/ShowFormContext';
 import { IPokemon } from '../interfaces/interfaces';
 
 interface TableProps {
     //service: IDataService;
     data: IPokemon[],
     searchValue: string;
+    setSelectedPokemon: Function,
+   // setShowForm: Function
 }
 
-export default function PokemonTable({ data, searchValue }: TableProps) {
+export default function PokemonTable({ data, searchValue, setSelectedPokemon }: TableProps) {
+
+    const {setShowForm} = useContext(ShowFormContext);
   return (
     <table data-testid="pokemon-table">
         <tr>
@@ -30,7 +35,7 @@ export default function PokemonTable({ data, searchValue }: TableProps) {
                 <td>{poke.attack}</td>
                 <td>{poke.defense}</td>
                 <td>
-                    <button>Editar</button>
+                    <button onClick={() => {setSelectedPokemon(poke); setShowForm(true)}}>Editar</button>
                     <button>Eliminar</button>
                 </td>
 
