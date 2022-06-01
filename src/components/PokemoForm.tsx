@@ -10,7 +10,7 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
   const {setShowForm} = useContext(ShowFormContext);
 
   const [pokemonState, setPokemonState] = useState<IPokemon>(
-    pokemon || {name: "", image: "", attack: 0, defense: 0}
+    pokemon || {name: "", image: "", attack: 0, defense: 0, hp: 0}
   )
 
   useEffect(()=>{
@@ -121,6 +121,7 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
             onChange={(e)=> setPokemonState({...pokemonState, attack: +e.target.value})}
             type="range" 
             min={0} 
+            required
             max={100} />
         </div>
 
@@ -133,6 +134,7 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
           value={pokemonState.defense}
           onChange={(e)=> setPokemonState({...pokemonState, defense: +e.target.value})}  
           type="range" 
+          required
           min={0} 
           max={100} />
         </div>

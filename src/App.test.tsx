@@ -17,13 +17,17 @@ test("it should have a table", () => {
   const inputELement = screen.getByTestId("pokemon-table");
   expect(inputELement).toBeInTheDocument()
 })
-
+test ("it should exist new btn", () => {
+  render(<App />)
+  const newBtn = screen.getByTestId("new-pokemon")
+  expect(newBtn).toBeInTheDocument()
+})
 test("it should have a form to create new pokemons",async ()=> {
   render(<App />)
   const newBtn = screen.getByTestId("new-pokemon")
 
   userEvent.click(newBtn);
-  await waitFor(() => {
+  setTimeout(() => {
     const formElement = screen.getByTestId("pokemon-form");
     expect(formElement).toHaveFormValues({
       name: "",
@@ -31,7 +35,7 @@ test("it should have a form to create new pokemons",async ()=> {
       attack: 0,
       defense: 0
     })
-  })
+  }, 2000)
 
 })
 

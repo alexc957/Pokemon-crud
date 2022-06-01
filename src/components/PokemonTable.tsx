@@ -29,14 +29,19 @@ export default function PokemonTable({ data, searchValue, setSelectedPokemon, se
     }
   return (
     <table data-testid="pokemon-table" className='poke-table'>
-        <tr>
-            <th>Nombre</th>
-            <th>Imagen</th>
-            <th>Ataque</th>
-            <th>Defensa</th>
-            <th>Acciones</th>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Imagen</th>
+                <th>Ataque</th>
+                <th>Defensa</th>
+                <th>Acciones</th>
 
-        </tr>
+            </tr>
+
+        </thead>
+        <tbody>
+
         {data.filter((pokemon:IPokemon)=> {
             if(!searchValue){
                 return true;
@@ -58,6 +63,9 @@ export default function PokemonTable({ data, searchValue, setSelectedPokemon, se
             </tr>
         })}
 
+
+        </tbody>
+    
     </table>
   )
 }
