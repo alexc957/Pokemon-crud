@@ -20,6 +20,9 @@ test("it should have a table", () => {
 
 test("it should have a form to create new pokemons",()=> {
   render(<App />)
+  const newBtn = screen.getByTestId("new-pokemon")
+
+  userEvent.click(newBtn);
 
   const formElement = screen.getByTestId("pokemon-form");
   expect(formElement).toHaveFormValues({

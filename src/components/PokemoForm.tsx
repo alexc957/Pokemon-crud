@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { POKEMON_TYPES } from '../constants';
 import { IFormProps, IPokemon } from '../interfaces/interfaces'
 
 
 
-export default function PokemoForm({pokemon, service, setShowForm,setShouldFetch}: IFormProps) {
+export default function PokemoForm({pokemon, service, setShowForm, setPokemons}: IFormProps) {
 
   const [pokemonState, setPokemonState] = useState<IPokemon>(
     pokemon || {name: "", image: "", attack: 0, defense: 0}
@@ -16,7 +17,9 @@ export default function PokemoForm({pokemon, service, setShowForm,setShouldFetch
         const response = await service.post(pokemonState);
         if(response.status===200){
           alert("Nuevo pokemon agregado");
-          setShouldFetch(true);
+          setPokemons((pokemons: IPokemon[]) => [...pokemons,pokemonState]);
+         // setShouldFetch(true);
+        
 
         }else {
           alert("Ocurrio un problema");
@@ -52,6 +55,17 @@ export default function PokemoForm({pokemon, service, setShowForm,setShouldFetch
             onChange={(e)=> setPokemonState({...pokemonState, image: e.target.value})}/>
       </div>
       <div>
+        <label htmlFor='type'>Tipo</label>
+        <select 
+          id="type"
+          name="type" 
+          data-testid="type" 
+          required
+          value={pokemonState.type|| "" } onChange={(e)=> setPokemonState({...pokemonState, type: e.target.value})}>
+          {POKEMON_TYPES.map((type: string, index: number)=> <option key={index} value={type}>{type}</option>)}
+        </select>
+      </div>
+      <div>
         <label htmlFor='attack'>Ataque</label>
         <input 
             id='attack' 
@@ -63,14 +77,28 @@ export default function PokemoForm({pokemon, service, setShowForm,setShouldFetch
             min={0} 
             max={100} />
       </div>
+  
       <div>
-      <label htmlFor='defense'>Defensa</label>
+        <label htmlFor='defense'>Defensa</label>
         <input 
           id='defense' 
           name='defense' 
           data-testid="defense" 
           value={pokemonState.defense}
           onChange={(e)=> setPokemonState({...pokemonState, defense: +e.target.value})}  
+          type="range" 
+          min={0} 
+          max={100} />
+      </div>
+
+      <div>
+        <label htmlFor='hp'>Hp</label>
+        <input 
+          id='hp' 
+          name='hp' 
+          data-testid="hp" 
+          value={pokemonState.hp || 0}
+          onChange={(e)=> setPokemonState({...pokemonState, hp: +e.target.value})}  
           type="range" 
           min={0} 
           max={100} />

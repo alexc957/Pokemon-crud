@@ -6,9 +6,12 @@ export interface IPokemon {
     attack: number;
     image: string;
     defense: number; 
+    hp?: number;
+    type?: string;
 }
 
 export interface IDataService {
+
     get(): Promise<any>;
     post(pokemon: IPokemon): Promise<any>;
     getOne(id: string): Promise<any>;
@@ -23,5 +26,11 @@ export interface IFormProps {
     pokemon?: IPokemon;
     service: IDataService
     setShowForm: Function,
-    setShouldFetch: Function
+    setPokemons: Function,
+}
+
+
+export interface IDataContex  {
+    filteredPokemons: IPokemon[];
+    setFilteredPokemons: Function;
 }
