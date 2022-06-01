@@ -41,8 +41,7 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
     const response = await service.post(pokemonState);
     if(response.status===200){
       alert("Nuevo pokemon agregado");
-      setPokemons((pokemons: IPokemon[]) => [...pokemons,pokemonState]);
-     // setShouldFetch(true);
+      setPokemons((pokemons: IPokemon[]) => [...pokemons,response.data]);
     
 
     }else {
@@ -68,41 +67,51 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
   }
   
 
-    return <form onSubmit={onSubmit}>
-      <div>
-        <label htmlFor='name'>Nombre</label>
-        <input 
-            data-testid="name" 
-            value={pokemonState.name}
-            onChange={(e)=> setPokemonState({...pokemonState, name: e.target.value})} 
-            id='name' 
-            name='name'  
-            type="text" 
-            required/>
-      </div>
-      <div>
-        <label htmlFor='image'>Imagen</label>
-        <input 
-            data-testid="image" 
-            id='image' 
-            name='image'  
-            type="text"
+    return <form onSubmit={onSubmit}>    
+     <div className='row'> 
+
+      <div className='form-child'>
+
+        <div>
+          <label htmlFor='name'>Nombre</label>
+          <input 
+              data-testid="name" 
+              value={pokemonState.name}
+              onChange={(e)=> setPokemonState({...pokemonState, name: e.target.value})} 
+              id='name' 
+              name='name'  
+              placeholder='Nombre del pokemon'
+              type="text" 
+              required/>
+        </div>
+        <div>
+          <label htmlFor='image'>Imagen</label>
+          <input 
+              data-testid="image" 
+              id='image' 
+              name='image'  
+              type="text"
+              placeholder='url de la imagen del pokemon'
+              required
+              value={pokemonState.image} 
+              onChange={(e)=> setPokemonState({...pokemonState, image: e.target.value})}/>
+        </div>
+        <div className='select-container'>
+          <label className='tipo' htmlFor='type'>Tipo</label>
+          <select 
+            id="type"
+            name="type" 
+            data-testid="type" 
             required
-            value={pokemonState.image} 
-            onChange={(e)=> setPokemonState({...pokemonState, image: e.target.value})}/>
-      </div>
-      <div>
-        <label htmlFor='type'>Tipo</label>
-        <select 
-          id="type"
-          name="type" 
-          data-testid="type" 
-          required
-          value={pokemonState.type|| "" } onChange={(e)=> setPokemonState({...pokemonState, type: e.target.value})}>
-          {POKEMON_TYPES.map((type: string, index: number)=> <option key={index} value={type}>{type}</option>)}
-        </select>
-      </div>
-      <div>
+            value={pokemonState.type|| "" } onChange={(e)=> setPokemonState({...pokemonState, type: e.target.value})}>
+            {POKEMON_TYPES.map((type: string, index: number)=> <option key={index} value={type}>{type}</option>)}
+          </select>
+        </div>
+
+        </div>
+        <div className="form-child">
+
+        <div>
         <label htmlFor='attack'>Ataque</label>
         <input 
             id='attack' 
@@ -113,9 +122,9 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
             type="range" 
             min={0} 
             max={100} />
-      </div>
-  
-      <div>
+        </div>
+
+        <div>
         <label htmlFor='defense'>Defensa</label>
         <input 
           id='defense' 
@@ -126,9 +135,9 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
           type="range" 
           min={0} 
           max={100} />
-      </div>
+        </div>
 
-      <div>
+        <div>
         <label htmlFor='hp'>Hp</label>
         <input 
           id='hp' 
@@ -139,11 +148,20 @@ export default function PokemoForm({pokemon, service, setPokemons}: IFormProps) 
           type="range" 
           min={0} 
           max={100} />
-      </div>
+        </div>
+
+        </div>
+
+
+     </div>
+
+     
+    
+     
 
       <div>
-        <button type='submit'>Guardar</button>
-        <button onClick={() => setShowForm(false)}>Cancelar</button>
+        <button className='btn-add' type='submit'>Guardar</button>
+        <button  className='btn-delete' onClick={() => setShowForm(false)}>Cancelar</button>
 
       </div>
 

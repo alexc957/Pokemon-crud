@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {createContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 
 import './App.css';
 import { DataService } from './services/DataService';
@@ -61,14 +61,16 @@ function App() {
       <div className="App">
         <div className='searchBar'>
           <input  data-testid="search-pokemon" name='searchValue' placeholder='Buscar por nombre' value={searchValue}  onChange={onChangeSearch}/>
-          <button onClick={()=> setShowForm(true)} data-testid="new-pokemon">Nuevo Pokemon</button>
+          <button className='btn-add' onClick={()=> setShowForm(true)} data-testid="new-pokemon">Nuevo Pokemon</button>
         </div>
 
         <PokemonTable 
             //setShowForm={setShowForm}
             data={pokemons} 
             searchValue={searchValue}  
-            setSelectedPokemon={setSelectedPokemon}/>
+            setSelectedPokemon={setSelectedPokemon}
+            setPokemons={setPokemons}
+            />
 
         {showForm &&   <PokemoForm 
                             pokemon={selectedPokemon} 

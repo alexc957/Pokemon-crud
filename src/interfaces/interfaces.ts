@@ -16,7 +16,7 @@ export interface IDataService {
     post(pokemon: IPokemon): Promise<any>;
     getOne(id: string): Promise<any>;
     put(id:string, pokemon: IPokemon): Promise<any>;
-    delete(id: string): Promise<any>;
+    delete(id: number): Promise<any>;
 
 
 }
