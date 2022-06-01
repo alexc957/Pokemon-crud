@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+#  Pokemon crud
+
+[![Test React Application](https://github.com/alexc957/Pokemon-crud/actions/workflows/test.yml/badge.svg)](https://github.com/alexc957/Pokemon-crud/actions/workflows/test.yml)
 
 Este proyecto permite realizar operaciones CRUD usando una rest API de pokemones. la estructura del proyecto es el siguiente: 
 - components: contiene todos los componentes para armar la app.
@@ -18,6 +20,6 @@ Este proyecto permite realizar operaciones CRUD usando una rest API de pokemones
 3. ejecutar: `mpm start` para ejecutar le servidor de desarrollo local. 
 4. para ejecutar las pruebas: `npm test`
 
-
+nota: este proyecto se lo puede visitar en [netlify](https://pokemon-crud-bco.netlify.app/)
 ## Capturas
 ![Alt text](./capturas/home.png "Home")
